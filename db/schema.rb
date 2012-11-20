@@ -14,19 +14,12 @@
 ActiveRecord::Schema.define(:version => 20121120074811) do
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id"
+    t.string   "facebook_id"
     t.string   "title"
     t.text     "markdown_contents"
     t.text     "html_contents"
-    t.text     "hash"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "facebook_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
 end

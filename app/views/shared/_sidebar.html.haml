@@ -1,0 +1,13 @@
+.span3
+  .well.sidebar-nav
+    - if @graph
+      %ul.nav.nav-list
+        %li.nav-header
+          Posts
+
+          %ul
+            - Post.all.each do |post|
+              %li= post.id
+    - else
+      Please <a href="#" class="signin">sign in</a> to continue.
+

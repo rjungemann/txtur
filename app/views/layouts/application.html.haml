@@ -31,6 +31,8 @@
               - if @graph
                 %li
                   %a.signout{ :href => '#' } Sign out
+                %li
+                  %a.new_post{ :href => '/posts/new' } New Post
               - else
                 %li
                   %a.signin{ :href => '#' } Sign into Facebook
@@ -38,18 +40,13 @@
     .container-fluid
 
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+        = render 'shared/sidebar'
+
         .span9
           = yield
 
-      %footer
-        %p &copy; Company 2012
+      .row-fluid
+        = render 'shared/footer'
 
-    = javascript_include_tag "application"
+    = javascript_include_tag 'application'
 
