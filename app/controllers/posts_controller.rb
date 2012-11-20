@@ -56,7 +56,8 @@ class PostsController < ApplicationController
       raise 'You are not the author of this post.'
     end
 
-    @post.assign_attributes! params[:post]
+    @post.assign_attributes params[:post]
+    @post.save!
 
     render 'show'
   end

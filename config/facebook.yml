@@ -5,6 +5,6 @@ test:
   app_id: 350516515006061
   secret_key: 4d91cd1e606a31b981681df7d35520ff
 production:
-  app_id: 350516515006061
-  secret_key: 4d91cd1e606a31b981681df7d35520ff
+  app_id: 119328154811026
+  secret_key: 7c5048f5d6952c2dd12d6807a4f981a7
 

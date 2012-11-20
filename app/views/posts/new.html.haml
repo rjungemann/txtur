@@ -1,13 +1,19 @@
-%form{ :method => 'post', :action => '/posts' }
-  %fieldset
-    %legend Create a new post
+- if @graph
+  %form{ :method => 'post', :action => '/posts' }
+    %fieldset
+      %legend Create a new post
 
-    %label Title
-    %input{ :type => 'text', :name => 'post[title]' }
+      %label Title
+      %input{ :type => 'text', :name => 'post[title]' }
 
-    %label Contents
-    %textarea{ :name => 'post[contents]' }
+      %label Contents
+      %textarea{ :name => 'post[contents]' }
 
-    %br
-    %input{ :type => 'submit', :value => 'Create Post' }
+      %br
+      %input{ :type => 'submit', :value => 'Create Post' }
+
+- else
+  %h2 Welcome to Txtur!
+
+  You must <a href="#" class="signin">sign in</a> to continue.
 

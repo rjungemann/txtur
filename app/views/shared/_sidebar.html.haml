@@ -6,7 +6,7 @@
           Posts
 
           %ul
-            - Post.all.each do |post|
+            - Post.where(:facebook_id => @user_id).each do |post|
               %li
                 %a{ :href => "/posts/#{post.uuid}" }= post.title
                 %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
