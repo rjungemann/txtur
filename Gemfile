@@ -8,6 +8,7 @@ gem 'sqlite3', :group => :development
 gem 'rdiscount'
 gem 'koala'
 gem 'haml-rails'
+gem 'uuidtools'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

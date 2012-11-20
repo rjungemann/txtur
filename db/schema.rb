@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20121120074811) do
 
   create_table "posts", :force => true do |t|
     t.string   "facebook_id"
+    t.string   "uuid"
     t.string   "title"
     t.text     "markdown_contents"
     t.text     "html_contents"
