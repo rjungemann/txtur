@@ -1,0 +1,46 @@
+<%
+  def facebook_config
+    YAML.load_file(Rails.root.join 'config/facebook.yml')[Rails.env]
+  end
+%>
+
+$ ->
+  $('.signin').click (e) ->
+    e.preventDefault()
+
+    FB.login (response) ->
+      if response.authResponse
+        window.location.reload()
+      else
+        console.log 'User cancelled login or did not fully authorize.'
+
+  $('.signout').click (e) ->
+    e.preventDefault()
+
+    FB.logout (response) ->
+      window.location.reload()
+
+window.fbAsyncInit = ->
+  FB.init
+    appId: <%= facebook_config['app_id'] %>
+    status: true
+    cookie: true
+    xfbml: true
+
+(
+  (d, debug) ->
+    js  = undefined
+    id  = 'facebook-jssdk'
+    ref = d.getElementsByTagName('script')[0]
+
+    return  if d.getElementById id
+
+    js       = d.createElement 'script'
+    js.id    = id
+    js.async = true
+    js.src   = '//connect.facebook.net/en_US/all' +
+      ((if debug then '/debug' else '')) + '.js'
+
+    ref.parentNode.insertBefore js, ref
+) document, false
+
