@@ -23,7 +23,7 @@ class SharesController < ApplicationController
       :action     => 'show',
       :id         => @post.uuid
 
-    link = 'http://slashdot.org' # for testing
+    # link = 'http://slashdot.org' # for testing
 
     @graph.put_wall_post message,
       {
