@@ -10,17 +10,27 @@ $ ->
   $('.signin').click (e) ->
     e.preventDefault()
 
-    FB.login (response) ->
+    loginCallback = (response) ->
       if response.authResponse
         window.location.reload()
       else
         console.log 'User cancelled login or did not fully authorize.'
+
+    FB.login loginCallback, scope: 'publish_stream'
 
   $('.signout').click (e) ->
     e.preventDefault()
 
     FB.logout (response) ->
       window.location.reload()
+
+  $('.share').click (e) ->
+    e.preventDefault()
+
+    message = '...'
+
+    $.post $(this).attr('href'), { message: message }, (data) ->
+      console.log 'foo', data
 
 window.fbAsyncInit = ->
   FB.init
