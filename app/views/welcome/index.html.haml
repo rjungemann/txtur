@@ -4,5 +4,14 @@
 
 %p Format your text as <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. Include links, references to external images, etc.
 
-%p Share your snippets. Only people you share the link with can see your snippet. More ways of sharing will be offered in the future, including Facebook sharing!
+%p Share your snippets. People you share the link with can see your snippet. You can even share a snippet on Facebook!
 
+%p We will be adding other features such as tagging, votets, and privacy settings. So check back soon!
+
+%h2 Most Recent Posts
+
+- Post.order(:created_at).limit(10).each do |post|
+  %h3
+    %a{ :href => "/posts/#{post.uuid}" }= post.title
+
+  %p= post.summary

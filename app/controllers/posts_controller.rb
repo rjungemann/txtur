@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     @post = Post.new params[:post]
 
     @post.facebook_id = @user_id
-    @post.uuid        = UUIDTools::UUID.random_create.to_s
+    @post.uuid        = Post.uuid
 
     @post.save!
 

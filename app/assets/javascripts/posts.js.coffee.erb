@@ -30,11 +30,16 @@ $ ->
     $(this).hide()
     $('#spinner').show()
 
-    $.post $(this).attr('href'), { message: '' }, (data) =>
+    request = $.post $(this).attr('href'), { message: '' }, (data) =>
       console.log 'Posted to Facebook', data
 
       $('#spinner').hide()
       $(this).replaceWith '(Shared!)'
+      $(this).show()
+
+    request.error =>
+      $('#spinner').hide()
+      $(this).replaceWith '(Sorry, an error occurred!)'
       $(this).show()
 
 window.fbAsyncInit = ->
