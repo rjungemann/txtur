@@ -2,6 +2,7 @@
   = @post.title
   %small
     %a.share{ :href => "/shares?id=#{@post.uuid}" } (Share on Facebook)
+    %img#spinner{ :src => asset_path('spinner.gif') }
 
 .well
   .contents!= @post.html_contents

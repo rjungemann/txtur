@@ -3,10 +3,10 @@
     %legend Create a new post
 
     %label Title
-    %input{ :type => 'text', :name => 'post[title]', :value => @post.title }
+    %input.title{ :type => 'text', :name => 'post[title]', :value => @post.title }
 
     %label Contents
-    %textarea{ :name => 'post[contents]' }= @post.markdown_contents
+    %textarea.contents{ :name => 'post[contents]' }= @post.markdown_contents
 
     %br
     %input{ :type => 'submit', :value => 'Create Post' }

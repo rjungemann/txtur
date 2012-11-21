@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate!
     config = YAML.load_file(Rails.root.join 'config/facebook.yml')[Rails.env]
+
+    p config.inspect
     oauth  = Koala::Facebook::OAuth.new config['app_id'], config['secret_key']
 
     @facebook_cookies ||= oauth.get_user_info_from_cookie cookies

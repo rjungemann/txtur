@@ -27,10 +27,15 @@ $ ->
   $('.share').click (e) ->
     e.preventDefault()
 
+    $(this).hide()
+    $('#spinner').show()
+
     $.post $(this).attr('href'), { message: '' }, (data) =>
       console.log 'Posted to Facebook', data
 
+      $('#spinner').hide()
       $(this).replaceWith '(Shared!)'
+      $(this).show()
 
 window.fbAsyncInit = ->
   FB.init
