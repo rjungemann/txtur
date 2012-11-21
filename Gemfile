@@ -19,9 +19,16 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :test do
-  gem 'rspec'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+
+  # Capybara needs the following
+
   gem 'database_cleaner'
+  gem 'nokogiri'
+  gem 'xpath'
+  gem 'selenium-webdriver'
 end
 
 gem 'jquery-rails'
