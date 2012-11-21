@@ -1,5 +1,9 @@
-%h2.title= @post.title
+%h2.title
+  = @post.title
+  %small
+    %a.share{ :href => "/shares?id=#{@post.uuid}" } (Share on Facebook)
 
 .well
   .contents!= @post.html_contents
+
 

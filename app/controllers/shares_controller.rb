@@ -1,5 +1,8 @@
 class SharesController < ApplicationController
 
+  include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::SanitizeHelper
+
   before_filter :authenticate!
 
   def create
@@ -14,24 +17,27 @@ class SharesController < ApplicationController
       raise 'You are not the author of this post.'
     end
 
-    message     = params[:message]
+    message     = 'I just created a short snippet of text with Txtur that I want to share with you!'
     name        = @post.title
-    description = @post.html_contents
+    description = truncate strip_tags(@post.html_contents.strip), :length => 150
     link        = url_for \
       :controller => 'posts',
       :action     => 'show',
       :id         => @post.uuid
 
     @graph.put_wall_post message,
-      'name'        => name,
-      'description' => description,
-      'link'        => link
+      {
+        'name'        => name,
+        'link'        => link,
+        'description' => description
+      },
+      'me'
 
     render :json => {
       :message     => message,
       :name        => name,
-      :description => description,
-      :link        => link
+      :link        => link,
+      :description => description
     }
   end
 
