@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Post do
@@ -51,6 +53,32 @@ describe Post do
       post.summary.should == 'Hello, world! What is going on? Craziness, ' +
         'indeed. So much text, so much text. Blah, blah, blah. Is this ' +
         'enough text, do you think? Most likely not...'
+    end
+
+  end
+
+  describe '#tags=' do
+
+    it 'creates a series of tags' do
+      post = Post.create
+
+      post.tags.count.should == 0
+
+      post.tags = 'foo, bar, Bar, bar, baz, ¬_¬'
+
+      post.tags.count.should == 5
+
+      %w[foo bar Bar baz ¬_¬].each do |tag_name|
+        post.tags.where(:name => tag_name).should exist
+      end
+
+      post.tags = 'yep, nope'
+
+      post.tags.count.should == 2
+
+      %w[yep nope].each do |tag_name|
+        post.tags.where(:name => tag_name).should exist
+      end
     end
 
   end

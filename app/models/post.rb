@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
 
   attr_accessible :title, :contents
 
+  has_many :taggings, :dependent => :destroy
+  has_many :tags, :through => :taggings
+
   def self.uuid
     UUIDTools::UUID.random_create.to_s
   end
@@ -16,6 +19,24 @@ class Post < ActiveRecord::Base
 
   def summary
     truncate strip_tags(self.html_contents.strip), :length => 150
+  end
+
+  def tags=(tag_string)
+    self.tags.delete_all
+
+    tag_string.split(/\s*,\s*/).each do |tag_name|
+      old_tag = Tag.where(:name => tag_name).first
+
+      if old_tag
+        if !self.tags.include?(old_tag)
+          self.tags << old_tag
+        end
+      else
+        tag = Tag.create :name => tag_name
+
+        self.tags << tag
+      end
+    end
   end
 
 end
