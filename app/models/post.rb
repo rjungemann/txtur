@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
 
   def contents=(raw_contents)
     self.markdown_contents = raw_contents
-    self.html_contents     = RDiscount.new(raw_contents).to_html
+    self.html_contents     = RDiscount.new(raw_contents).to_html.chomp
   end
 
   def summary
