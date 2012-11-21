@@ -2,14 +2,22 @@
   = @post.title
 
 %p
+  - if @post.private
+    %span.label.label-warning Private
+  - else
+    %span.label.label-success Public
+
   %small
     Created
     %abbr.timeago{ :title => @post.created_at.iso8601 }= @post.created_at.strftime '%c'
     and updated
     %abbr.timeago{ :title => @post.updated_at.iso8601 }= @post.updated_at.strftime '%c'
 
-.well
+  %hr
+
   .contents!= @post.html_contents
+
+  %hr
 
 .well.share-well
   %textarea.message{ :name => 'message', :placeholder => 'I wrote a snippet with Txtur I\'d like to share with you!' }

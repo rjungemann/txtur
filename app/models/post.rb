@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::SanitizeHelper
 
-  attr_accessible :title, :contents
+  attr_accessible :title, :contents, :private
 
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings

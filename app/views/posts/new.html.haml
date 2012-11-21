@@ -9,6 +9,18 @@
       %label Contents
       %textarea.contents{ :name => 'post[contents]' }
 
+      .help-block
+        Posts are formatted with
+        <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
+
+      %label.checkbox
+        %input{ :type => 'checkbox', :name => 'post[private]' }
+        Private
+
+      .help-block
+        Posts marked as private will not show up to other users within Txtur, but be forewarned that
+        %b anyone you share the link to your post with will still be able to see your post.
+
       %br
       %input.btn.btn-primary{ :type => 'submit', :value => 'Create Post' }
 

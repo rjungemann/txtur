@@ -1,13 +1,31 @@
-= form_tag "/posts/#{@post.uuid}", :method => :put, :class => 'form' do
-  %fieldset
-    %legend Edit a post
+- if @graph
+  = form_tag "/posts/#{@post.uuid}", :method => :put, :class => 'form' do
+    %fieldset
+      %legend Edit a post
 
-    %label Title
-    %input.title{ :type => 'text', :name => 'post[title]', :value => @post.title }
+      %label Title
+      %input.title{ :type => 'text', :name => 'post[title]', :value => @post.title }
 
-    %label Contents
-    %textarea.contents{ :name => 'post[contents]' }= @post.markdown_contents
+      %label Contents
+      %textarea.contents{ :name => 'post[contents]' }= @post.markdown_contents
 
-    %br
-    %input.btn.btn-primary{ :type => 'submit', :value => 'Edit Post' }
+      .help-block
+        Posts are formatted with
+        <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
+
+      %label.checkbox
+        %input{ :type => 'checkbox', :name => 'post[private]' }
+        Private
+
+      .help-block
+        Posts marked as private will not show up to other users within Txtur, but be forewarned that
+        %b anyone you share the link to your post with will still be able to see your post.
+
+      %br
+      %input.btn.btn-primary{ :type => 'submit', :value => 'Edit Post' }
+
+- else
+  %h2 Welcome to Txtur!
+
+  You must <a href="#" class="signin">sign in</a> to continue.
 

@@ -10,9 +10,7 @@
             - Post.where(:facebook_id => @user_id).each do |post|
               %li
                 %a{ :href => "/posts/#{post.uuid}" }= post.title
-
-                - if @user_id == post.facebook_id
-                  %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
+                %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
 
                 %br
 
