@@ -1,28 +1,35 @@
 %h2 Share snippets with Txtur
 
-%p You want to share a short story, poem, or some other snippet of text with people on Facebook.
+%p.lead Txtur lets you simply write, then share it with your friends with zero friction.
 
-%p But Facebook doesn't give you enough control. On the other hand, a Google Doc is too heavy handed.
-
-%p Txtur lets you simply write, then share it with your friends with zero friction.
+%p Share a short story, poem, or some other snippet of text with people on Facebook.
 
 %p
-  %b Simply:
+  Customize your snippets while sharing effortlessly,
+  %b in just 3 easy steps!
 
-%ul
+%ol
   %li Create a snippet, whether it's poetry, code, prose, etc.
   %li Format your text with <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>. Include links, external images, etc.
   %li Effortlessly share your snippets on Facebook, or send people the link!
 
-%p We will be adding other features such as tagging, voting, and privacy settings. So check back soon!
-
-%p
-  %b What are you waiting for? Txt urs!
+%p.lead What are you waiting for? Txt urs!
 
 %h2 Most Recent Posts
 
-- Post.order(:created_at).limit(10).each do |post|
-  %h3
-    %a{ :href => "/posts/#{post.uuid}" }= post.title
+%ul
+  - Post.order(:created_at).limit(10).each do |post|
+    %li
+      %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-  %p= post.summary
+      - if @user_id == post.facebook_id
+        %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
+
+      %br
+
+      %small
+        Created
+        %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
+        %br
+        Updated
+        %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'

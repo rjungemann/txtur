@@ -9,14 +9,19 @@
             - Post.where(:facebook_id => @user_id).each do |post|
               %li
                 %a{ :href => "/posts/#{post.uuid}" }= post.title
-                %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
+
+                - if @user_id == post.facebook_id
+                  %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
+
                 %br
+
                 %small
                   Created
                   %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
                   %br
                   Updated
                   %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+
     - else
       Please <a href="#" class="signin">sign in</a> to continue.
 
