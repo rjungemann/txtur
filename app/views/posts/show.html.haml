@@ -1,6 +1,13 @@
 %h2.title
   = @post.title
 
+%p
+  %small
+    Created
+    %abbr.timeago{ :title => @post.created_at.iso8601 }= @post.created_at.strftime '%c'
+    and updated
+    %abbr.timeago{ :title => @post.updated_at.iso8601 }= @post.updated_at.strftime '%c'
+
 .well
   .contents!= @post.html_contents
 
