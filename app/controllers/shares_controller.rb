@@ -14,7 +14,8 @@ class SharesController < ApplicationController
       raise 'You are not the author of this post.'
     end
 
-    message     = 'I just created a short snippet of text with Txtur that I want to share with you!'
+    message     = params[:message] ||
+      'I just created a short snippet of text with Txtur that I want to share with you!'
     name        = @post.title
     description = @post.summary
     link        = url_for \
@@ -22,7 +23,7 @@ class SharesController < ApplicationController
       :action     => 'show',
       :id         => @post.uuid
 
-    # link = 'http://slashdot.org' # for testing
+    link = 'http://slashdot.org' # for testing
 
     @graph.put_wall_post message,
       {

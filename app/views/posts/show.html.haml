@@ -1,10 +1,11 @@
 %h2.title
   = @post.title
-  %small
-    %a.share{ :href => "/shares?id=#{@post.uuid}" } (Share on Facebook)
-    %img#spinner{ :src => asset_path('spinner.gif') }
 
 .well
   .contents!= @post.html_contents
 
+.well.share-well
+  %textarea.message{ :name => 'message', :placeholder => 'I wrote a snippet with Txtur I\'d like to share with you!' }
+  %a.share.btn.btn-primary{ :href => "/shares?id=#{@post.uuid}" } Share on Facebook
+  %img#spinner{ :src => asset_path('spinner.gif') }
 

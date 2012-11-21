@@ -27,19 +27,31 @@ $ ->
   $('.share').click (e) ->
     e.preventDefault()
 
-    $(this).hide()
+    $(this).addClass 'disabled'
+    $('.share-well .message').attr 'disabled', 'disabled'
     $('#spinner').show()
 
-    request = $.post $(this).attr('href'), { message: '' }, (data) =>
+    message = $('.message').val()
+
+    if message.length == 0
+      message = $('.message').attr 'placeholder'
+
+    console.log 'Preparing to send "' + message + '" to Facebook.'
+
+    request = $.post $(this).attr('href'), { message: message }, (data) =>
       console.log 'Posted to Facebook', data
 
+      $('.share-well .message').hide()
+      $('.share-well br').hide()
       $('#spinner').hide()
-      $(this).replaceWith '(Shared!)'
+      $(this).replaceWith 'Shared this post on your Facebook wall!'
       $(this).show()
 
     request.error =>
+      $('.share-well .message').hide()
+      $('.share-well br').hide()
       $('#spinner').hide()
-      $(this).replaceWith '(Sorry, an error occurred!)'
+      $(this).replaceWith 'Sorry, an error occurred when trying to share your post!'
       $(this).show()
 
 window.fbAsyncInit = ->
