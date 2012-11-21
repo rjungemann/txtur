@@ -1,5 +1,5 @@
 - if @graph
-  %form{ :method => 'post', :action => '/posts' }
+  %form.form{ :method => 'post', :action => '/posts' }
     %fieldset
       %legend Create a new post
 
@@ -10,7 +10,7 @@
       %textarea.contents{ :name => 'post[contents]' }
 
       %br
-      %input{ :type => 'submit', :value => 'Create Post' }
+      %input.btn.btn-primary{ :type => 'submit', :value => 'Create Post' }
 
 - else
   %h2 Welcome to Txtur!

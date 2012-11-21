@@ -1,10 +1,11 @@
-.span3
+.span4
   .well.sidebar-nav
     - if @graph
       %ul.nav.nav-list
         %li.nav-header
-          Posts
+          Your Posts
 
+        %li
           %ul
             - Post.where(:facebook_id => @user_id).each do |post|
               %li
@@ -12,6 +13,10 @@
 
                 - if @user_id == post.facebook_id
                   %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
+
+                %br
+
+                = post.summary
 
                 %br
 

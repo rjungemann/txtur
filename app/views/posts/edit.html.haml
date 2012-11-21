@@ -1,6 +1,6 @@
-= form_tag "/posts/#{@post.uuid}", :method => :put do
+= form_tag "/posts/#{@post.uuid}", :method => :put, :class => 'form' do
   %fieldset
-    %legend Create a new post
+    %legend Edit a post
 
     %label Title
     %input.title{ :type => 'text', :name => 'post[title]', :value => @post.title }
@@ -9,5 +9,5 @@
     %textarea.contents{ :name => 'post[contents]' }= @post.markdown_contents
 
     %br
-    %input{ :type => 'submit', :value => 'Create Post' }
+    %input.btn.btn-primary{ :type => 'submit', :value => 'Edit Post' }
 
