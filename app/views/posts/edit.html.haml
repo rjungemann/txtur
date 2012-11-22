@@ -13,13 +13,21 @@
         Posts are formatted with
         <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
 
+      %label Tags
+      %input.tags{ :type => 'text', :name => 'post[post_tags]', :value => @post.post_tags }
+
+      .help-block
+        Tags are a comma-separated list of categories that posts can be searched by.
+
       %label.checkbox
-        %input{ :type => 'checkbox', :name => 'post[private]' }
-        Private
+        %input{ :type => 'hidden', :name => 'post[public]', :value => 'false' }
+        %input{ :type => 'checkbox', :name => 'post[public]', :checked => ( @post.public? ? 'checked' : nil ), :value => 'true' }
+        Public
 
       .help-block
         Posts marked as private will not show up to other users within Txtur, but be forewarned that
         %b anyone you share the link to your post with will still be able to see your post.
+        Posts are public by default.
 
       %br
       %input.btn.btn-primary{ :type => 'submit', :value => 'Edit Post' }

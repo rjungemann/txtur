@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::SanitizeHelper
 
-  attr_accessible :title, :contents, :private
+  attr_accessible :title, :contents, :public, :post_tags
 
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
@@ -21,7 +21,7 @@ class Post < ActiveRecord::Base
     truncate strip_tags(self.html_contents.strip), :length => 150
   end
 
-  def tags=(tag_string)
+  def post_tags=(tag_string)
     self.tags.delete_all
 
     tag_string.split(/\s*,\s*/).each do |tag_name|
@@ -37,6 +37,10 @@ class Post < ActiveRecord::Base
         self.tags << tag
       end
     end
+  end
+
+  def post_tags
+    self.tags.map(&:name).join ', '
   end
 
 end

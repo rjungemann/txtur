@@ -4,14 +4,17 @@
   %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
 
 %p
-  - if @post.private
-    %span.label.label-warning Private
-  - else
+  - if @post.public?
     %span.label.label-success Public
+  - else
+    %span.label.label-warning Private
 
   %small
-    Created by
-    %b= @post.first_name || 'anonymous'
+    Created
+
+    - if @post.first_name
+      by <b><abbr title="#{@post.full_name}">#{@post.first_name}</abbr></b>
+
     %abbr.timeago{ :title => @post.created_at.iso8601 }= @post.created_at.strftime '%c'
     and updated
     %abbr.timeago{ :title => @post.updated_at.iso8601 }= @post.updated_at.strftime '%c'

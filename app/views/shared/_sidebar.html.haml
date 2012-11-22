@@ -3,6 +3,15 @@
     - if @graph
       %ul.nav.nav-list
         %li.nav-header
+          Popular Tags
+
+        %li
+          %span
+            - tags = Tag.order(:created_at).limit(20)
+            - tags.each_with_index do |tag, i|
+              <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
+
+        %li.nav-header
           Your Posts
 
         %li
@@ -11,10 +20,10 @@
               %li
                 %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-                - if post.private
-                  %span.label.label-warning Private
-                - else
+                - if post.public?
                   %span.label.label-success Public
+                - else
+                  %span.label.label-warning Private
 
                 %br
 

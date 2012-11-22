@@ -1,0 +1,22 @@
+%h2
+  Posts for
+  %span.text-success= @tag_name
+
+%ul
+  - @tag.posts.where(:public => 1).order(:created_at).each do |post|
+    %li
+      %a{ :href => "/posts/#{post.uuid}" }= post.title
+
+      %br
+
+      = post.summary
+
+      %br
+
+      %small
+        Created by
+        %b= post.first_name || 'anonymous'
+        %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
+        and updated
+        %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+

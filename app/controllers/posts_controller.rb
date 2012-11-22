@@ -13,16 +13,15 @@ class PostsController < ApplicationController
   def create
     raise 'User is not signed in.' unless @user_id
 
+    user_info = @graph.get_object('me')
+
     @post = Post.new params[:post]
 
     @post.facebook_id = @user_id
     @post.uuid        = Post.uuid
-
-    user_info = @graph.get_object('me')
-
-    @post.full_name  = user_info['name']
-    @post.first_name = user_info['first_name']
-    @post.last_name  = user_info['last_name']
+    @post.full_name   = user_info['name']
+    @post.first_name  = user_info['first_name']
+    @post.last_name   = user_info['last_name']
 
     @post.save!
 
