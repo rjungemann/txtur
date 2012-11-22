@@ -18,6 +18,12 @@ class PostsController < ApplicationController
     @post.facebook_id = @user_id
     @post.uuid        = Post.uuid
 
+    user_info = @graph.get_object('me')
+
+    @post.full_name  = user_info['name']
+    @post.first_name = user_info['first_name']
+    @post.last_name  = user_info['last_name']
+
     @post.save!
 
     render 'show'

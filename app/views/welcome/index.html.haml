@@ -32,7 +32,8 @@
       %br
 
       %small
-        Created
+        Created by
+        %b= post.first_name || 'anonymous'
         %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
         and updated
         %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
