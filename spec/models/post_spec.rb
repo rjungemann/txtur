@@ -57,14 +57,14 @@ describe Post do
 
   end
 
-  describe '#tags=' do
+  describe '#post_tags=' do
 
     it 'creates a series of tags' do
-      post = Post.create
+      post = Post.create :title => 'First Post!', :contents => 'Hello!'
 
       post.tags.count.should == 0
 
-      post.tags = 'foo, bar, Bar, bar, baz, ¬_¬'
+      post.post_tags = 'foo, bar, Bar, bar, baz, ¬_¬'
 
       post.tags.count.should == 5
 
@@ -72,7 +72,7 @@ describe Post do
         post.tags.where(:name => tag_name).should exist
       end
 
-      post.tags = 'yep, nope'
+      post.post_tags = 'yep, nope'
 
       post.tags.count.should == 2
 

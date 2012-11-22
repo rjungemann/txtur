@@ -5,8 +5,8 @@ describe Tag do
   describe '.reap_orphaned_tags!' do
 
     it 'destroys all unassociated tags' do
-      post = Post.create
-      post.tags = 'foo, bar, baz'
+      post = Post.create :title => 'First Post!', :contents => 'Hello!'
+      post.post_tags = 'foo, bar, baz'
 
       post.destroy
 

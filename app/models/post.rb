@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
 
   attr_accessible :title, :contents, :public, :post_tags
 
+  validates_presence_of :title
+  validates_presence_of :markdown_contents
+
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
 

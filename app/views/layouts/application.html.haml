@@ -45,6 +45,11 @@
         = render 'shared/sidebar'
 
         .span8
+          - flash.each do |key, value|
+            .alert
+              %button.close{ :type => 'button', 'data-dismiss' => 'alert' } ×
+              = value
+
           = yield
 
       .row-fluid

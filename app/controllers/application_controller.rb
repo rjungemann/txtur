@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_filter :authenticate!
+  before_filter :setup_user!
 
-  def authenticate!
+  def setup_user!
     config = YAML.load_file(Rails.root.join 'config/facebook.yml')[Rails.env]
     oauth  = Koala::Facebook::OAuth.new config['app_id'], config['secret_key']
 

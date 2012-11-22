@@ -54,6 +54,7 @@ $ ->
       $(this).replaceWith 'Sorry, an error occurred when trying to share your post!'
       $(this).show()
 
+
 window.fbAsyncInit = ->
   FB.init
     appId: <%= facebook_config['app_id'] %>

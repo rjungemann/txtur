@@ -1,16 +1,16 @@
 .span4
   .well.sidebar-nav
-    - if @graph
-      %ul.nav.nav-list
-        %li.nav-header
-          Popular Tags
+    %ul.nav.nav-list
+      %li.nav-header
+        Popular Tags
 
-        %li
-          %span
-            - tags = Tag.order(:created_at).limit(20)
-            - tags.each_with_index do |tag, i|
-              <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
+      %li
+        %span
+          - tags = Tag.order(:created_at).limit(20)
+          - tags.each_with_index do |tag, i|
+            <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
 
+      - if @graph
         %li.nav-header
           Your Posts
 
@@ -38,6 +38,8 @@
                   Updated
                   %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
 
-    - else
-      Please <a href="#" class="signin">sign in</a> to continue.
+      - else
+        %li.nav-header Sign in
+        %li
+          %span Please <a href="#" class="signin">sign in</a> to post.
 

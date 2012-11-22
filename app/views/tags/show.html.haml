@@ -3,7 +3,7 @@
   %span.text-success= @tag_name
 
 %ul
-  - @tag.posts.where(:public => 1).order(:created_at).each do |post|
+  - @tag.posts.where(:public => true).order(:created_at).each do |post|
     %li
       %a{ :href => "/posts/#{post.uuid}" }= post.title
 

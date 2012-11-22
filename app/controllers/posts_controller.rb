@@ -2,8 +2,6 @@ require 'uuidtools'
 
 class PostsController < ApplicationController
 
-  before_filter :authenticate!
-
   def index
     @post = Post.new
 
@@ -65,6 +63,25 @@ class PostsController < ApplicationController
     @post.save!
 
     render 'show'
+  end
+
+  def destroy
+    raise 'User is not signed in.' unless @user_id
+    raise 'Post ID must be provided.' unless params[:id]
+
+    @post = Post.where(:uuid => params[:id]).first
+
+    raise 'Post does not exist.' unless @post
+
+    unless @post.facebook_id == @user_id
+      raise 'You are not the author of this post.'
+    end
+
+    @post.destroy
+
+    flash[:notice] = 'Post was successfully deleted.'
+
+    redirect_to :controller => 'welcome', :action => 'index'
   end
 
 end

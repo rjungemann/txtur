@@ -1,7 +1,10 @@
 %h2.title
   = @post.title
 
-  %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
+  %form.actions{ :method => 'POST', :action => "/posts/#{@post.uuid}" }
+    %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
+    %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
+    %input.btn{ :type => 'submit', :value => 'Delete' }
 
 %p
   - if @post.public?
@@ -18,6 +21,13 @@
     %abbr.timeago{ :title => @post.created_at.iso8601 }= @post.created_at.strftime '%c'
     and updated
     %abbr.timeago{ :title => @post.updated_at.iso8601 }= @post.updated_at.strftime '%c'
+
+  .tags
+    %small
+      %b Tagged as
+      - tags = @post.tags
+      - tags.each_with_index do |tag, i|
+        <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
 
   %hr
 
