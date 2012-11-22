@@ -1,10 +1,11 @@
 %h2.title
   = @post.title
 
-  %form.actions{ :method => 'POST', :action => "/posts/#{@post.uuid}" }
-    %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
-    %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
-    %input.btn{ :type => 'submit', :value => 'Delete' }
+  - if @graph && @user_id == @post.facebook_id
+    %form.actions{ :method => 'POST', :action => "/posts/#{@post.uuid}" }
+      %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
+      %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
+      %input.btn{ :type => 'submit', :value => 'Delete' }
 
 %p
   - if @post.public?
