@@ -1,6 +1,8 @@
 %h2.title
   = @post.title
 
+  %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
+
 %p
   - if @post.private
     %span.label.label-warning Private

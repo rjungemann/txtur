@@ -10,7 +10,11 @@
             - Post.where(:facebook_id => @user_id).each do |post|
               %li
                 %a{ :href => "/posts/#{post.uuid}" }= post.title
-                %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
+
+                - if post.private
+                  %span.label.label-warning Private
+                - else
+                  %span.label.label-success Public
 
                 %br
 

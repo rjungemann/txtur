@@ -22,9 +22,6 @@
     %li
       %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-      - if @user_id == post.facebook_id
-        %a{ :href => "/posts/#{post.uuid}/edit" } (edit)
-
       %br
 
       = post.summary
