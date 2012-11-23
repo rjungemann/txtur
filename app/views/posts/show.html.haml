@@ -23,12 +23,14 @@
     and updated
     %abbr.timeago{ :title => @post.updated_at.iso8601 }= @post.updated_at.strftime '%c'
 
-  .tags
-    %small
-      %b Tagged as
-      - tags = @post.tags
-      - tags.each_with_index do |tag, i|
-        <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
+  - tags = @post.tags
+  - unless tags.empty?
+    .tags
+      %small
+        %b Tagged as
+        - tags = @post.tags
+        - tags.each_with_index do |tag, i|
+          <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
 
   %hr
 
