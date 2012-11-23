@@ -1,38 +1,41 @@
 .span4
   .well.sidebar-nav
     %ul.nav.nav-list
-      %li.nav-header
-        Popular Tags
-
-      %li
-        %span
-          - tags = Tag.order(:created_at).limit(20)
-          - tags.each_with_index do |tag, i|
-            <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
-
-      - if @graph
+      - tags = Tag.order(:created_at).limit(20)
+      - if tags.length > 0
         %li.nav-header
-          Your Posts
+          Popular Tags
 
         %li
-          - Post.where(:facebook_id => @user_id).each do |post|
-            %p
-              %a{ :href => "/posts/#{post.uuid}" }= post.title
+          %span
+            - tags.each_with_index do |tag, i|
+              <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
 
-              - if post.public?
-                %span.label.label-success Public
-              - else
-                %span.label.label-warning Private
+      - if @graph
+        - posts = Post.where(:facebook_id => @user_id)
+        - if posts.length > 0
+          %li.nav-header
+            Your Posts
 
-              %br
+          %li
+            - posts.each do |post|
+              %p
+                %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-              %small
-                Updated
-                %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+                - if post.public?
+                  %span.label.label-success Public
+                - else
+                  %span.label.label-warning Private
 
-              %br
+                %br
 
-              = post.summary
+                %small
+                  Updated
+                  %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+
+                %br
+
+                %small= post.summary
 
         - stars = Star.where(:facebook_id => @user_id)
         - if stars.count > 0
@@ -58,7 +61,7 @@
 
                   %br
 
-                  = post.summary
+                  %small= post.summary
 
       - else
         %li.nav-header Sign in
