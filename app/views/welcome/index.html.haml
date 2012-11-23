@@ -19,23 +19,22 @@
 
 %h2 Most Recent Posts
 
-%ul
-  - Post.where(:public => true).order('updated_at DESC').limit(10).each do |post|
-    %li
-      %a{ :href => "/posts/#{post.uuid}" }= post.title
+- Post.where(:public => true).order('updated_at DESC').limit(10).each do |post|
+  %p
+    %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-      %br
+    %br
 
-      %small
-        Created
+    %small
+      Created
 
-        - if post.first_name
-          by <b><abbr title="#{post.full_name}">#{post.first_name}</abbr></b>
+      - if post.first_name
+        by <b><abbr title="#{post.full_name}">#{post.first_name}</abbr></b>
 
-        and updated
-        %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+      and updated
+      %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
 
-      %br
+    %br
 
-      = post.summary
+    = post.summary
 

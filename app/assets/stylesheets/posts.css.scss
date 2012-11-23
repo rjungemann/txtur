@@ -19,6 +19,15 @@
   }
 }
 
+.link-well {
+  display: none;
+  padding-right: 30px;
+
+  input {
+    width: 100%;
+  }
+}
+
 .actions {
   font-weight: normal;
   display: inline-block;
@@ -35,3 +44,4 @@
     width: 100%;
   }
 }
+

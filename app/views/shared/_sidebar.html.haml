@@ -15,25 +15,24 @@
           Your Posts
 
         %li
-          %ul
-            - Post.where(:facebook_id => @user_id).each do |post|
-              %li
-                %a{ :href => "/posts/#{post.uuid}" }= post.title
+          - Post.where(:facebook_id => @user_id).each do |post|
+            %p
+              %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-                - if post.public?
-                  %span.label.label-success Public
-                - else
-                  %span.label.label-warning Private
+              - if post.public?
+                %span.label.label-success Public
+              - else
+                %span.label.label-warning Private
 
-                %br
+              %br
 
-                %small
-                  Updated
-                  %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+              %small
+                Updated
+                %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
 
-                %br
+              %br
 
-                = post.summary
+              = post.summary
 
       - else
         %li.nav-header Sign in

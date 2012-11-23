@@ -7,6 +7,29 @@
 $ ->
   $('abbr.timeago').timeago()
 
+  $('.facebook-share').click (e) ->
+    e.preventDefault()
+
+    $('.facebook-share').closest('li').addClass 'active'
+    $('.link-share').closest('li').removeClass 'active'
+
+    $('.share-well').show()
+    $('.link-well').hide()
+
+  $('.link-share').click (e) ->
+    e.preventDefault()
+
+    $('.facebook-share').closest('li').removeClass 'active'
+    $('.link-share').closest('li').addClass 'active'
+
+    $('.share-well').hide()
+    $('.link-well').show()
+
+  $('.link-well input').focus ->
+    setTimeout =>
+      $(this).select()
+    , 1
+
   $('.signin').click (e) ->
     e.preventDefault()
 

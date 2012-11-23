@@ -7,7 +7,7 @@
       %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
       %input.btn{ :type => 'submit', :value => 'Delete' }
 
-%p
+.metadata
   - if @post.public?
     %span.label.label-success Public
   - else
@@ -23,23 +23,42 @@
     and updated
     %abbr.timeago{ :title => @post.updated_at.iso8601 }= @post.updated_at.strftime '%c'
 
-  - tags = @post.tags
-  - unless tags.empty?
-    .tags
-      %small
+    - tags = @post.tags
+    - unless tags.empty?
+      .tags
         %b Tagged as
         - tags = @post.tags
         - tags.each_with_index do |tag, i|
           <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
 
-  %hr
+%hr
 
-  .contents!= @post.html_contents
+.contents!= @post.html_contents
 
-  %hr
+%hr
+
+.nav.nav-tabs
+  %li.active
+    %a.facebook-share{ :href => '#' } Facebook Sharing
+
+  %li
+    %a.link-share{ :href => '#' } Link Sharing
 
 .well.share-well
   %textarea.message{ :name => 'message', :placeholder => 'I wrote a snippet with Txtur I\'d like to share with you!' }
   %a.share.btn.btn-primary{ :href => "/shares?id=#{@post.uuid}" } Share on Facebook
   %img#spinner{ :src => asset_path('spinner.gif') }
+
+.well.link-well
+  %label Internal link
+  %input{ :type => 'text', :readonly => 'readonly', :value => "@#{@post.uuid}" }
+
+  .help-block
+    Link to this post within Txtur by pasting the internal link into the contents of another post.
+
+  %label External link
+  %input{ :type => 'text', :readonly => 'readonly', :value => url_for(:controller => 'posts', :action => 'show', :id => @post.uuid, :only_path => false) }
+
+  .help-block
+    Link to this post by pasting the external link into another website.
 
