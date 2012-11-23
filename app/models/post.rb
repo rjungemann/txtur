@@ -61,5 +61,11 @@ class Post < ActiveRecord::Base
     self.tags.map(&:name).join ', '
   end
 
+  def update_star_count!
+    star_count = Star.where(:post_id => self.id).count
+
+    self.update_attribute :star_count, star_count
+  end
+
 end
 

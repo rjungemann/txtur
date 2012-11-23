@@ -25,6 +25,8 @@ class StarsController < ApplicationController
 
     @post.stars << @star
 
+    @post.update_star_count!
+
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end
 
@@ -39,6 +41,8 @@ class StarsController < ApplicationController
     raise 'Post does not exist.' unless @post
 
     Star.where(:facebook_id => @user_id).where(:post_id => @post.id).destroy_all
+
+    @post.update_star_count!
 
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end

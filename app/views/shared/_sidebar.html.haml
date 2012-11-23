@@ -37,7 +37,7 @@
 
                 %small= post.summary
 
-        - stars = Star.where(:facebook_id => @user_id)
+        - stars = Star.where(:facebook_id => @user_id).order('updated_at DESC')
         - if stars.count > 0
           %li.nav-header
             Starred Posts

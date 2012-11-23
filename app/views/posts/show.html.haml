@@ -26,7 +26,7 @@
     Created
 
     - if @post.first_name
-      by <b><abbr title="#{@post.full_name}">#{@post.first_name}</abbr></b>
+      by <a href="https://facebook.com/#{@post.facebook_id}" title="#{@post.full_name}">#{@post.first_name}</a>
 
     %abbr.timeago{ :title => @post.created_at.iso8601 }= @post.created_at.strftime '%c'
     and updated

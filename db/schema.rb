@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123184935) do
+ActiveRecord::Schema.define(:version => 20121123205613) do
 
   create_table "posts", :force => true do |t|
     t.string   "facebook_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20121123184935) do
     t.string   "last_name"
     t.string   "full_name"
     t.boolean  "public",            :default => true
+    t.integer  "star_count",        :default => 0
   end
 
   create_table "stars", :force => true do |t|

@@ -99,4 +99,40 @@ describe Post do
 
   end
 
+  describe '#update_star_count!' do
+
+    it 'updates star count' do
+      post = Post.create :title => 'First Post!', :contents => 'Hello!'
+
+      post.star_count.should == 0
+
+      post.update_star_count!
+
+      post.star_count.should == 0
+
+      star = Star.create
+
+      post.stars << star
+
+      post.update_star_count!
+
+      post.star_count.should == 1
+
+      star2 = Star.create
+
+      post.stars << star2
+
+      post.update_star_count!
+
+      post.star_count.should == 2
+
+      post.stars.delete star
+
+      post.update_star_count!
+
+      post.star_count.should == 1
+    end
+
+  end
+
 end
