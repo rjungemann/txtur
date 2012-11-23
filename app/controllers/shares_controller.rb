@@ -40,3 +40,4 @@ class SharesController < ApplicationController
   end
 
 end
+

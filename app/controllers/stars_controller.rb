@@ -27,6 +27,8 @@ class StarsController < ApplicationController
 
     @post.update_star_count!
 
+    flash[:notice] = 'You successfully starred the post.'
+
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end
 
@@ -43,6 +45,8 @@ class StarsController < ApplicationController
     Star.where(:facebook_id => @user_id).where(:post_id => @post.id).destroy_all
 
     @post.update_star_count!
+
+    flash[:notice] = 'You successfully unstarred the post.'
 
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end

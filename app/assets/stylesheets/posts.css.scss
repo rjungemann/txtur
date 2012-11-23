@@ -1,7 +1,3 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 .form {
   padding-right: 40px;
 
@@ -62,7 +58,7 @@
   border: 1px dotted #ccc;
   padding-right: 10px;
 
-  .file {
+  .markdown-file {
     margin: 10px;
   }
 }

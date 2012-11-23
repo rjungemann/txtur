@@ -24,6 +24,8 @@ class ImportsController < ApplicationController
 
     @post.save!
 
+    flash[:notice] = 'Post was successfully imported.'
+
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end
 

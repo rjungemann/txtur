@@ -10,8 +10,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-
-    render 'new'
   end
 
   def create
@@ -28,6 +26,8 @@ class PostsController < ApplicationController
     @post.last_name   = user_info['last_name']
 
     @post.save!
+
+    flash[:notice] = 'Post was successfully created.'
 
     render 'show'
   end
@@ -67,6 +67,8 @@ class PostsController < ApplicationController
 
     @post.assign_attributes params[:post]
     @post.save!
+
+    flash[:notice] = 'Post was successfully updated.'
 
     render 'show'
   end
