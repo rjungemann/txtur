@@ -12,7 +12,7 @@ class DownloadsController < ApplicationController
     raise 'Format must be provided.' unless format
 
     if format == 'json'
-      Tempfile.open('post', Rails.root.join('tmp/downloads') ) do |f|
+      Tempfile.open('download', Rails.root.join('tmp') ) do |f|
         f.print post.to_json
 
         f.flush
@@ -20,7 +20,7 @@ class DownloadsController < ApplicationController
         send_file f.path, :filename => "#{post.uuid}.json", :type => 'application/json'
       end
     elsif format == 'markdown'
-      Tempfile.open('post', Rails.root.join('tmp/downloads') ) do |f|
+      Tempfile.open('download', Rails.root.join('tmp') ) do |f|
         f.print post.markdown_contents
 
         f.flush
@@ -28,7 +28,7 @@ class DownloadsController < ApplicationController
         send_file f.path, :filename => "#{post.title}.markdown", :type => 'text/x-web-markdown'
       end
     elsif format == 'html'
-      Tempfile.open('post', Rails.root.join('tmp/downloads') ) do |f|
+      Tempfile.open('download', Rails.root.join('tmp') ) do |f|
         f.print post.html_contents
 
         f.flush
