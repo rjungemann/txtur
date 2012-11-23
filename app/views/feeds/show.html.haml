@@ -1,8 +1,8 @@
 %h2
   Posts for
-  %span.text-success= @tag_name
+  %span.text-success= @user_info['name']
 
-- @tag.posts.where(:public => true).order(:updated_at).each do |post|
+- @posts.each do |post|
   %p
     %a{ :href => "/posts/#{post.uuid}" }= post.title
 

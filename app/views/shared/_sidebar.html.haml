@@ -3,8 +3,7 @@
     %ul.nav.nav-list
       - tags = Tag.order(:created_at).limit(20)
       - if tags.length > 0
-        %li.nav-header
-          Popular Tags
+        %li.nav-header Popular Tags
 
         %li
           %span
@@ -12,6 +11,14 @@
               <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}
 
       - if @graph
+        %li.nav-header Your Feed
+
+        %li
+          %span
+            <a href="/feeds/#{@user_id}">HTML</a>,
+            <a href="/feeds/#{@user_id}.rss">RSS</a>, or
+            <a href="/feeds/#{@user_id}.json">JSON</a>
+
         - posts = Post.where(:facebook_id => @user_id)
         - if posts.length > 0
           %li.nav-header

@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def create
     raise 'User is not signed in.' unless @user_id
 
-    user_info = @graph.get_object('me')
+    user_info = @graph.get_object 'me'
 
     @post = Post.new params[:post]
 

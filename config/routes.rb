@@ -4,6 +4,7 @@ Txtur::Application.routes.draw do
   resources :tags
   resources :stars
   resources :downloads
+  resources :feeds
 
   root :to => 'welcome#index'
 end
