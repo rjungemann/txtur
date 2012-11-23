@@ -5,3 +5,8 @@
 require File.expand_path('../config/application', __FILE__)
 
 Txtur::Application.load_tasks
+
+desc 'reap orphaned tags'
+task :reap_orphaned_tags => :environment do
+  Tag.reap_orphaned_tags!
+end
