@@ -15,26 +15,27 @@
 
 %p.lead What are you waiting for? Txt urs!
 
-%hr
+- recent_posts = Post.where(:public => true).order('updated_at DESC').limit 5
+- if recent_posts.length > 0
+  %hr
 
-%h2 Most Recent Posts
+  %h2 Most Recent Posts
+  - recent_posts.each do |post|
+    %p
+      %a{ :href => "/posts/#{post.uuid}" }= post.title
 
-- Post.where(:public => true).order('updated_at DESC').limit(10).each do |post|
-  %p
-    %a{ :href => "/posts/#{post.uuid}" }= post.title
+      %br
 
-    %br
+      %small
+        Created
 
-    %small
-      Created
+        - if post.first_name
+          by <b><abbr title="#{post.full_name}">#{post.first_name}</abbr></b>
 
-      - if post.first_name
-        by <b><abbr title="#{post.full_name}">#{post.first_name}</abbr></b>
+        and updated
+        %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
 
-      and updated
-      %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+      %br
 
-    %br
-
-    = post.summary
+      = post.summary
 
