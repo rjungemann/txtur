@@ -5,6 +5,7 @@ Txtur::Application.routes.draw do
   resources :stars
   resources :downloads
   resources :feeds
+  resources :imports
 
   root :to => 'welcome#index'
 end
