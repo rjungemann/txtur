@@ -1,5 +1,5 @@
 %h2
-  Posts for
+  Posts for tag
   %span.text-success= @tag_name
 
 - @tag.posts.where(:public => true).order(:updated_at).each do |post|
@@ -14,7 +14,7 @@
 
     %small
       Created by
-      %b= post.first_name || 'anonymous'
+      <a href="https://facebook.com/#{post.facebook_id}" title="#{post.full_name}">#{post.first_name}</a>
       %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
       and updated
       %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'

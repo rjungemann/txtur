@@ -1,6 +1,6 @@
 %h2
   Posts for
-  %span.text-success= @user_info['name']
+  <a href="https://facebook.com/#{@facebook_id}" title="#{ @user_info['name'] }">#{ @user_info['first_name'] }</a>
 
 - @posts.each do |post|
   %p
@@ -14,7 +14,7 @@
 
     %small
       Created by
-      %b= post.first_name || 'anonymous'
+      <a href="https://facebook.com/#{post.facebook_id}" title="#{post.full_name}">#{post.first_name}</a>
       %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
       and updated
       %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
