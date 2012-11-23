@@ -3,24 +3,26 @@
 
   - if Star.where(:facebook_id => @user_id).where(:post_id => @post.id).count == 0
     %form.star-action{ :method => 'POST', :action => "/stars?post_id=#{@post.uuid}" }
-      %input.btn{ :type => 'submit', :value => 'Star' }
+      %input.btn.btn-info{ :type => 'submit', :value => 'Star' }
   - else
     %form.star-action{ :method => 'POST', :action => "/stars/#{@post.uuid}" }
       %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
-      %input.btn{ :type => 'submit', :value => 'Unstar' }
+      %input.btn.btn-info{ :type => 'submit', :value => 'Unstar' }
 
   - if @graph && @user_id == @post.facebook_id
-    %a.btn.edit-button{ :href => "/posts/#{@post.uuid}/edit" } Edit
+    %a.btn.edit-button.btn-warning{ :href => "/posts/#{@post.uuid}/edit" } Edit
 
     %form.delete-action{ :method => 'POST', :action => "/posts/#{@post.uuid}" }
       %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
-      %input.btn{ :type => 'submit', :value => 'Delete' }
+      %input.btn.btn-danger{ :type => 'submit', :value => 'Delete' }
 
 .metadata
   - if @post.public?
     %span.label.label-success Public
   - else
     %span.label.label-warning Private
+
+  %span.label.label-info #{@post.star_count} Stars
 
   %small
     Created
@@ -35,7 +37,7 @@
     - tags = @post.tags
     - unless tags.empty?
       .tags
-        %b Tagged as
+        Tagged as
         - tags = @post.tags
         - tags.each_with_index do |tag, i|
           <a href="/tags/#{tag.name}">#{tag.name}</a>#{', ' if i < tags.length - 1}

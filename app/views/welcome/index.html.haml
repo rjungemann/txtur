@@ -44,7 +44,7 @@
 - if recent_posts.length > 0
   %hr
 
-  %h2 Most Recent Posts
+  %h2 Recently Updated Posts
   - recent_posts.each do |post|
     %p
       %a{ :href => "/posts/#{post.uuid}" }= post.title
