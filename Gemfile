@@ -9,6 +9,7 @@ gem 'rdiscount'
 gem 'koala'
 gem 'haml-rails'
 gem 'uuidtools'
+gem 'thin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
