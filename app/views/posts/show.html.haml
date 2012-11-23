@@ -1,7 +1,7 @@
 %h2.title
   = @post.title
 
-  - if Star.where(:facebook_id => @user_id).count == 0
+  - if Star.where(:facebook_id => @user_id).where(:post_id => @post.id).count == 0
     %form.star-action{ :method => 'POST', :action => "/stars?post_id=#{@post.uuid}" }
       %input.btn{ :type => 'submit', :value => 'Star' }
   - else

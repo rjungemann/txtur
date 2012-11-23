@@ -8,7 +8,7 @@ class StarsController < ApplicationController
 
     raise 'Post does not exist.' unless @post
 
-    if Star.where(:facebook_id => @user_id).count > 0
+    if Star.where(:facebook_id => @user_id).where(:post_id => @post.id).count > 0
       raise 'You already starred this post'
     end
 
@@ -21,9 +21,9 @@ class StarsController < ApplicationController
     @star.first_name  = user_info['first_name']
     @star.last_name   = user_info['last_name']
 
-    @star.post = @post
-
     @star.save!
+
+    @post.stars << @star
 
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end
@@ -38,7 +38,7 @@ class StarsController < ApplicationController
 
     raise 'Post does not exist.' unless @post
 
-    Star.where(:facebook_id => @user_id).destroy_all
+    Star.where(:facebook_id => @user_id).where(:post_id => @post.id).destroy_all
 
     redirect_to :controller => 'posts', :action => 'show', :id => @post.uuid
   end

@@ -1,6 +1,8 @@
 class CreateStars < ActiveRecord::Migration
+
   def change
     create_table :stars do |t|
+      t.integer :post_id
       t.string :facebook_id
       t.string :first_name
       t.string :last_name
@@ -9,4 +11,6 @@ class CreateStars < ActiveRecord::Migration
       t.timestamps
     end
   end
+
 end
+

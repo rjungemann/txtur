@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20121123184935) do
   end
 
   create_table "stars", :force => true do |t|
+    t.integer  "post_id"
     t.string   "facebook_id"
     t.string   "first_name"
     t.string   "last_name"
