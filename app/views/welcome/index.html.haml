@@ -15,14 +15,15 @@
 
 %p.lead What are you waiting for? Txt urs!
 
-- recent_posts = Post.where(:public => true).order('updated_at DESC').limit 5
-- if recent_posts.length > 0
+- starred_posts = Post.where(:public => true).order('star_count DESC').limit 5
+- if starred_posts.length > 0
   %hr
 
-  %h2 Most Recent Posts
-  - recent_posts.each do |post|
+  %h2 Most Starred Posts
+  - starred_posts.each do |post|
     %p
       %a{ :href => "/posts/#{post.uuid}" }= post.title
+      %span.label.label-info #{post.star_count} Stars
 
       %br
 
@@ -39,15 +40,14 @@
 
       = post.summary
 
-- starred_posts = Post.where(:public => true).order('star_count DESC').limit 5
-- if starred_posts.length > 0
+- recent_posts = Post.where(:public => true).order('updated_at DESC').limit 5
+- if recent_posts.length > 0
   %hr
 
-  %h2 Most Starred Posts
-  - starred_posts.each do |post|
+  %h2 Most Recent Posts
+  - recent_posts.each do |post|
     %p
       %a{ :href => "/posts/#{post.uuid}" }= post.title
-      %span.label.label-info #{post.star_count} Stars
 
       %br
 
