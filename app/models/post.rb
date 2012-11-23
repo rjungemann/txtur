@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
 
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
+  has_many :stars
 
   def self.uuid
     UUIDTools::UUID.random_create.to_s

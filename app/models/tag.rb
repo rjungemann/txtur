@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :posts, :through => :taggings
 
-  def self.reap_orphaned_tags!
+  def self.reap_orphaned!
     Tag.find_each do |tag|
       tag.destroy if tag.taggings.empty?
     end

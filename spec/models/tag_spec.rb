@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tag do
 
-  describe '.reap_orphaned_tags!' do
+  describe '.reap_orphaned!' do
 
     it 'destroys all unassociated tags' do
       post = Post.create :title => 'First Post!', :contents => 'Hello!'
@@ -12,12 +12,12 @@ describe Tag do
 
       Tag.count.should == 3
 
-      post2 = Post.create
-      post2.tags = 'foo'
+      post2 = Post.create :title => 'Second Post!', :contents => 'What!?'
+      post2.post_tags = 'foo'
 
       Tag.count.should == 3
 
-      Tag.reap_orphaned_tags!
+      Tag.reap_orphaned!
 
       Tag.count.should == 1
       Tag.first.name.should == 'foo'
