@@ -1,7 +1,5 @@
 class SharesController < ApplicationController
 
-  before_filter :authenticate!
-
   def create
     raise 'User is not signed in.' unless @user_id
     raise 'Post ID must be provided.' unless params[:id]

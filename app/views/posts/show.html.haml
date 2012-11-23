@@ -1,10 +1,19 @@
 %h2.title
   = @post.title
 
-  - if @graph && @user_id == @post.facebook_id
-    %form.actions{ :method => 'POST', :action => "/posts/#{@post.uuid}" }
+  - if Star.where(:facebook_id => @user_id).count == 0
+    %form.star-action{ :method => 'POST', :action => "/stars?post_id=#{@post.uuid}" }
+      %input.btn{ :type => 'submit', :value => 'Star' }
+  - else
+    %form.star-action{ :method => 'POST', :action => "/stars/#{@post.uuid}" }
       %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
-      %a.btn{ :href => "/posts/#{@post.uuid}/edit" } Edit
+      %input.btn{ :type => 'submit', :value => 'Unstar' }
+
+  - if @graph && @user_id == @post.facebook_id
+    %a.btn.edit-button{ :href => "/posts/#{@post.uuid}/edit" } Edit
+
+    %form.delete-action{ :method => 'POST', :action => "/posts/#{@post.uuid}" }
+      %input{ :type => "hidden", :name => "_method", :value => 'DELETE' }
       %input.btn{ :type => 'submit', :value => 'Delete' }
 
 .metadata

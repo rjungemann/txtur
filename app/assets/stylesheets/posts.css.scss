@@ -19,6 +19,14 @@
   }
 }
 
+.edit-button {
+  font-weight: normal;
+}
+
+.delete-action, .star-action {
+  display: inline;
+}
+
 .link-well {
   display: none;
   padding-right: 30px;
