@@ -27,16 +27,13 @@
 
                 %br
 
-                = post.summary
+                %small
+                  Updated
+                  %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
 
                 %br
 
-                %small
-                  Created
-                  %abbr.timeago{ :title => post.created_at.iso8601 }= post.created_at.strftime '%c'
-                  %br
-                  Updated
-                  %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+                = post.summary
 
       - else
         %li.nav-header Sign in

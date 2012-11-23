@@ -17,11 +17,25 @@ class Post < ActiveRecord::Base
 
   def contents=(raw_contents)
     self.markdown_contents = raw_contents
-    self.html_contents     = RDiscount.new(raw_contents).to_html.chomp
+
+    # Allow referencing of other posts
+
+    regex = /\@[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i
+
+    link_contents = raw_contents.gsub regex do |match|
+      uuid = match[1..-1]
+      post = Post.where(:uuid => uuid).first
+
+      return match unless post
+
+      "<a href=\"/posts/#{uuid}\">#{post.title}</a>"
+    end
+
+    self.html_contents = RDiscount.new(link_contents).to_html.chomp
   end
 
   def summary
-    truncate strip_tags(self.html_contents.strip), :length => 150
+    truncate strip_tags(self.html_contents.strip), :length => 100
   end
 
   def post_tags=(tag_string)

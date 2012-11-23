@@ -30,6 +30,24 @@ describe Post do
       post.html_contents.should == '<p><em>Hello</em>, world!</p>'
     end
 
+    it 'finds references to other posts and turns them into links' do
+      post = Post.new
+
+      post.title    = 'First post'
+      post.contents = 'Guess it is cool.'
+      post.uuid     = '34b4e681-8872-4d90-9138-e7ed6b1f2005'
+
+      post.save!
+
+      post2 = Post.new
+
+      post2.title    = 'Second post'
+      post2.contents = 'Check out @34b4e681-8872-4d90-9138-e7ed6b1f2005, neat.'
+
+      post2.markdown_contents.should == "Check out @34b4e681-8872-4d90-9138-e7ed6b1f2005, neat."
+      post2.html_contents.should     == "<p>Check out <a href=\"/posts/34b4e681-8872-4d90-9138-e7ed6b1f2005\">First post</a>, neat.</p>"
+    end
+
   end
 
   describe '#summary' do
@@ -49,10 +67,8 @@ describe Post do
         'more text. You never know if you have enough text. Blah, boring, ' +
         'boring, boring.'
 
-
       post.summary.should == 'Hello, world! What is going on? Craziness, ' +
-        'indeed. So much text, so much text. Blah, blah, blah. Is this ' +
-        'enough text, do you think? Most likely not...'
+        'indeed. So much text, so much text. Blah, blah, blah. ...'
     end
 
   end
