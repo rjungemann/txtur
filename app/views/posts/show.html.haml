@@ -53,6 +53,9 @@
   %li
     %a.link-share{ :href => '#' } Link Sharing
 
+  %li
+    %a.download-post{ :href => '#' } Download Post
+
 .well.share-well
   %textarea.message{ :name => 'message', :placeholder => 'I wrote a snippet with Txtur I\'d like to share with you!' }
   %a.share.btn.btn-primary{ :href => "/shares?id=#{@post.uuid}" } Share on Facebook
@@ -70,4 +73,10 @@
 
   .help-block
     Link to this post by pasting the external link into another website.
+
+.well.download-well
+  Download as
+  <a href="/downloads/#{@post.uuid}?format=markdown">Markdown</a>,
+  <a href="/downloads/#{@post.uuid}?format=html">HTML</a>, or
+  <a href="/downloads/#{@post.uuid}?format=json">JSON</a>
 

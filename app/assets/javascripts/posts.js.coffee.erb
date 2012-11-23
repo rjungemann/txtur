@@ -12,18 +12,33 @@ $ ->
 
     $('.facebook-share').closest('li').addClass 'active'
     $('.link-share').closest('li').removeClass 'active'
+    $('.download-post').closest('li').removeClass 'active'
 
     $('.share-well').show()
     $('.link-well').hide()
+    $('.download-well').hide()
 
   $('.link-share').click (e) ->
     e.preventDefault()
 
     $('.facebook-share').closest('li').removeClass 'active'
     $('.link-share').closest('li').addClass 'active'
+    $('.download-post').closest('li').removeClass 'active'
 
     $('.share-well').hide()
     $('.link-well').show()
+    $('.download-well').hide()
+
+  $('.download-post').click (e) ->
+    e.preventDefault()
+
+    $('.facebook-share').closest('li').removeClass 'active'
+    $('.link-share').closest('li').removeClass 'active'
+    $('.download-post').closest('li').addClass 'active'
+
+    $('.share-well').hide()
+    $('.link-well').hide()
+    $('.download-well').show()
 
   $('.link-well input').focus ->
     setTimeout =>

@@ -8,6 +8,12 @@ class PostsController < ApplicationController
     render 'new'
   end
 
+  def new
+    @post = Post.new
+
+    render 'new'
+  end
+
   def create
     raise 'User is not signed in.' unless @user_id
 
