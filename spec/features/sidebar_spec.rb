@@ -6,7 +6,9 @@ describe 'Sidebar' do
 
   context 'As a signed in user' do
 
-    it 'has a list of your posts'
+    it 'has links to your feed'
+    it 'has posts you have created'
+    it 'has posts you have starred'
 
   end
 
