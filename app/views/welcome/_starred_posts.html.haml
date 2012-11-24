@@ -1,0 +1,25 @@
+- starred_posts = Post.public.starred.recent.limit 5
+- if starred_posts.length > 0
+  %hr
+
+  %h2 Most Starred Posts
+  - starred_posts.each do |post|
+    %p
+      %a{ :href => "/posts/#{post.uuid}" }= post.title
+      %span.label.label-info #{post.star_count} Stars
+
+      %br
+
+      %small
+        Created
+
+        - if post.first_name
+          by <a href="https://facebook.com/#{post.facebook_id}" title="#{post.full_name}">#{post.first_name}</a>
+
+        and updated
+        %abbr.timeago{ :title => post.updated_at.iso8601 }= post.updated_at.strftime '%c'
+
+      %br
+
+      = post.summary
+

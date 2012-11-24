@@ -12,9 +12,55 @@ describe 'Welcome', :js => true do
 
   context 'Starred Posts' do
 
-    it 'only shows section if posts are present'
+    it 'only shows section if posts are present' do
+      visit root_path
 
-    it 'shows starred posts'
+      page.should have_no_content('Most Starred Posts')
+
+      post = Post.new
+
+      post.title    = 'Starred Post'
+      post.contents = 'Should be shown'
+
+      post.save!
+
+      star = Star.create
+
+      post.stars << star
+
+      post.update_star_count!
+
+      visit root_path
+
+      page.should have_content('Most Starred Posts')
+    end
+
+    it 'shows starred posts' do
+      post = Post.new
+
+      post.title    = 'Starred Post'
+      post.contents = 'Should be shown'
+
+      post.save!
+
+      star = Star.create
+
+      post.stars << star
+
+      post.update_star_count!
+
+      post2 = Post.new
+
+      post2.title    = 'Unstarred Post'
+      post2.contents = 'Should be hidden'
+
+      post2.save!
+
+      visit root_path
+
+      page.text.should match(/Most Starred Posts.*Starred Post.*Recently Updated Posts/m)
+      page.text.should_not match(/Most Starred Posts.*Unstarred Post.*Recently Updated Posts/m)
+    end
 
     it 'shows public posts' do
       # Create a public post
@@ -82,7 +128,22 @@ describe 'Welcome', :js => true do
 
   context 'Recent Posts' do
 
-    it 'only shows section if posts are present'
+    it 'only shows section if posts are present' do
+      visit root_path
+
+      page.should have_no_content('Recently Updated Posts')
+
+      post = Post.new
+
+      post.title    = 'Starred Post'
+      post.contents = 'Should be shown'
+
+      post.save!
+
+      visit root_path
+
+      page.should have_content('Recently Updated Posts')
+    end
 
     it 'shows public posts' do
       # Create a public post

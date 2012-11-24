@@ -18,30 +18,7 @@
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114")
 
   %body
-    .navbar
-      .navbar-inner
-        .container-fluid
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-
-          %a.brand(href="/") Txtur
-
-          .container.nav-collapse
-            %ul.nav
-              - if @graph
-                %li
-                  %a.signout{ :href => '#' } Sign out
-                %li
-                  %a.profile{ :href => "https://facebook.com/#{@user_id}" } Your Profile
-                %li
-                  %a.new_post{ :href => '/posts/new' } New Post
-                %li
-                  %a.new_post{ :href => '/imports/new' } Import Post
-              - else
-                %li
-                  %a.signin{ :href => '#' } Sign into Facebook
+    = render 'shared/topbar'
 
     .container-fluid
 
@@ -49,10 +26,7 @@
         = render 'shared/sidebar'
 
         .span8
-          - flash.each do |key, value|
-            .alert
-              %button.close{ :type => 'button', 'data-dismiss' => 'alert' } ×
-              = value
+          = render 'shared/flashes'
 
           = yield
 
