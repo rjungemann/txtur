@@ -4,7 +4,7 @@ class StarsController < ApplicationController
     raise 'User is not signed in.' unless @user_id
     raise 'Post ID must be provided.' unless params[:post_id]
 
-    @post = Post.where(:uuid => params[:post_id]).first
+    @post = Post.for_uuid(params[:post_id]).first
 
     raise 'Post does not exist.' unless @post
 
@@ -38,11 +38,11 @@ class StarsController < ApplicationController
 
     user_info = @graph.get_object('me')
 
-    @post = Post.where(:uuid => params[:id]).first
+    @post = Post.for_uuid(params[:id]).first
 
     raise 'Post does not exist.' unless @post
 
-    Star.where(:facebook_id => @user_id).where(:post_id => @post.id).destroy_all
+    Star.for_user_id(@user_id).for_post_id(@post.id).destroy_all
 
     @post.update_star_count!
 

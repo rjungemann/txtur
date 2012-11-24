@@ -15,7 +15,7 @@
 
 %p.lead What are you waiting for? Txt urs!
 
-- starred_posts = Post.where(:public => true).where('star_count > 0').order('star_count DESC').limit 5
+- starred_posts = Post.public.starred.recent.limit 5
 - if starred_posts.length > 0
   %hr
 
@@ -40,7 +40,7 @@
 
       = post.summary
 
-- recent_posts = Post.where(:public => true).order('updated_at DESC').limit 5
+- recent_posts = Post.public.recent.limit 5
 - if recent_posts.length > 0
   %hr
 

@@ -4,7 +4,7 @@ class SharesController < ApplicationController
     raise 'User is not signed in.' unless @user_id
     raise 'Post ID must be provided.' unless params[:id]
 
-    @post = Post.where(:uuid => params[:id]).first
+    @post = Post.for_uuid(params[:id]).first
 
     raise 'Post does not exist.' unless @post
 

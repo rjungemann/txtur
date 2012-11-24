@@ -4,9 +4,7 @@ class FeedsController < ApplicationController
     @facebook_id = params[:id]
     @user_info = @graph.get_object @facebook_id
 
-    @posts = Post.where(:public => true).
-      where(:facebook_id => @facebook_id).
-      order('created_at DESC')
+    @posts = Post.public.for_user_id(@facebook_id).by_created
 
     respond_to do |format|
       format.html

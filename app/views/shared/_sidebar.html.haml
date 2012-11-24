@@ -1,7 +1,7 @@
 .span4
   .well.sidebar-nav
     %ul.nav.nav-list
-      - tags = Tag.order(:created_at).limit(20)
+      - tags = Tag.recent.limit 20
       - if tags.length > 0
         %li.nav-header Popular Tags
 
@@ -19,7 +19,7 @@
             <a href="/feeds/#{@user_id}.rss">RSS</a>, or
             <a href="/feeds/#{@user_id}.json">JSON</a>
 
-        - posts = Post.where(:facebook_id => @user_id)
+        - posts = Post.for_user_id @user_id
         - if posts.length > 0
           %li.nav-header
             Your Posts
@@ -44,7 +44,7 @@
 
                 %small= post.summary
 
-        - stars = Star.where(:facebook_id => @user_id).order('updated_at DESC')
+        - stars = Star.for_user_id(@user_id).recent
         - if stars.count > 0
           %li.nav-header
             Starred Posts

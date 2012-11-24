@@ -38,5 +38,3 @@ gem 'twitter-bootstrap-rails',
   :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git',
   :branch => 'static'
 
-gem 'heroku'
-

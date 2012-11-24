@@ -2,7 +2,7 @@
   Posts for tag
   %span.text-success= @tag_name
 
-- @tag.posts.where(:public => true).order(:updated_at).each do |post|
+- @tag.posts.public.recent.each do |post|
   %p
     %a{ :href => "/posts/#{post.uuid}" }= post.title
 

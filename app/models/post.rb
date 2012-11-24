@@ -12,8 +12,36 @@ class Post < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :stars
 
-  def self.uuid
-    UUIDTools::UUID.random_create.to_s
+  class << self
+
+    def uuid
+      UUIDTools::UUID.random_create.to_s
+    end
+
+    def for_user_id(user_id)
+      self.where :facebook_id => user_id
+    end
+
+    def for_uuid(uuid)
+      self.where :uuid => uuid
+    end
+
+    def public
+      self.where :public => true
+    end
+
+    def starred
+      self.where('star_count > 0').order 'star_count DESC'
+    end
+
+    def recent
+      self.order 'updated_at DESC'
+    end
+
+    def by_created
+      self.order 'created_at DESC'
+    end
+
   end
 
   def contents=(raw_contents)

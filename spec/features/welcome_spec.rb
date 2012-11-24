@@ -35,7 +35,7 @@ describe 'Welcome', :js => true do
 
     visit root_path
 
-    page.text.should match(/Most Recent Posts.*Foo 3.*Foo 2.*Foo/m)
+    page.text.should match(/Recently Updated Posts.*Foo 3.*Foo 2.*Foo/m)
     page.should have_no_content('Private Post')
   end
 
