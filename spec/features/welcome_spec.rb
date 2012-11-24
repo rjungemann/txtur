@@ -13,20 +13,18 @@ describe 'Welcome', :js => true do
 
     page.should have_content('Sign into Facebook')
 
-    signin!
+    signin_and_out! do
+      visit root_path
 
-    visit root_path
-
-    page.should have_content('Sign out')
-
-    signout!
+      page.should have_content('Sign out')
+    end
 
     visit root_path
 
     page.should have_content('Sign into Facebook')
   end
 
-  context 'Starred Posts' do
+  describe 'Starred Posts' do
 
     it 'only shows section if posts are present' do
       visit root_path
@@ -142,7 +140,7 @@ describe 'Welcome', :js => true do
 
   end
 
-  context 'Recent Posts' do
+  describe 'Recent Posts' do
 
     it 'only shows section if posts are present' do
       visit root_path

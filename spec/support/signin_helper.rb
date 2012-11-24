@@ -47,3 +47,11 @@ def signout!
   $graph        = nil
 end
 
+def signin_and_out!(options = {})
+  signin! options
+
+  yield
+
+  signout!
+end
+
