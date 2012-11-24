@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @posts.to_json, :layout => false }
+      format.json { render :json => @posts.to_json, :layout => false, :callback => params[:callback] }
       format.rss  { render :layout => false }
     end
   end

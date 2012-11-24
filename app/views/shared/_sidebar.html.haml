@@ -17,7 +17,7 @@
           %span
             <a href="/feeds/#{@user_id}">HTML</a>,
             <a href="/feeds/#{@user_id}.rss">RSS</a>, or
-            <a href="/feeds/#{@user_id}.json">JSON</a>
+            <a title='You can provide an optional "callback" parameter.' href="/feeds/#{@user_id}.json">JSONP</a>
 
         - posts = Post.for_user_id @user_id
         - if posts.length > 0

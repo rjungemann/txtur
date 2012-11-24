@@ -6,8 +6,24 @@ describe 'Welcome', :js => true do
     visit root_path
 
     page.should have_content('Share snippets with Txtur')
+  end
 
-    pending
+  it 'allows user to sign in' do
+    visit root_path
+
+    page.should have_content('Sign into Facebook')
+
+    signin!
+
+    visit root_path
+
+    page.should have_content('Sign out')
+
+    signout!
+
+    visit root_path
+
+    page.should have_content('Sign into Facebook')
   end
 
   context 'Starred Posts' do
