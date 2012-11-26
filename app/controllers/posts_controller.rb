@@ -17,7 +17,13 @@ class PostsController < ApplicationController
 
     user_info = @graph.get_object 'me'
 
-    @post = Post.new params[:post]
+    begin
+      @post = Post.new params[:post]
+    rescue PostContentException => e
+      flash[:error] = e.message
+
+      render 'new'
+    end
 
     @post.uuid        = Post.uuid
     @post.facebook_id = @user_id
@@ -65,7 +71,14 @@ class PostsController < ApplicationController
       raise 'You are not the author of this post.'
     end
 
-    @post.assign_attributes params[:post]
+    begin
+      @post.assign_attributes params[:post]
+    rescue PostContentException => e
+      flash[:error] = e.message
+
+      render 'edit'
+    end
+
     @post.save!
 
     flash[:notice] = 'Post was successfully updated.'

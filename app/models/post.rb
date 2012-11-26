@@ -1,3 +1,6 @@
+class PostContentExeption < Exception
+end
+
 class Post < ActiveRecord::Base
 
   include ActionView::Helpers::TextHelper
@@ -60,11 +63,17 @@ class Post < ActiveRecord::Base
       "<a href=\"/posts/#{uuid}\">#{post.title}</a>"
     end
 
-    self.html_contents = RDiscount.new(link_contents).to_html.chomp
+    begin
+      self.html_contents = RDiscount.new(link_contents).to_html.chomp
+    rescue Exception => e
+      raise PostContentException, 'An error occurred when trying to generate HTML for the post. Please examine your Markdown syntax and try again.'
+    end
   end
 
   def summary
-    truncate strip_tags(self.html_contents.strip), :length => 100
+    text = self.html_contents || ''
+
+    truncate strip_tags(text.strip), :length => 100
   end
 
   def post_tags=(tag_string)
