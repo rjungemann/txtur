@@ -23,6 +23,8 @@ class PostsController < ApplicationController
       flash[:error] = e.message
 
       render 'new'
+
+      return
     end
 
     @post.uuid        = Post.uuid
