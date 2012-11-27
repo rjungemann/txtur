@@ -17,15 +17,7 @@ class PostsController < ApplicationController
 
     user_info = @graph.get_object 'me'
 
-    begin
-      @post = Post.new params[:post]
-    rescue Exception => e
-      flash[:error] = e.message
-
-      render 'new'
-
-      return
-    end
+    @post = Post.new params[:post]
 
     @post.uuid        = Post.uuid
     @post.facebook_id = @user_id
