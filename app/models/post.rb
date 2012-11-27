@@ -58,9 +58,11 @@ class Post < ActiveRecord::Base
       uuid = match[1..-1]
       post = Post.where(:uuid => uuid).first
 
-      return match unless post
-
-      "<a href=\"/posts/#{uuid}\">#{post.title}</a>"
+      if post
+        "<a href=\"/posts/#{uuid}\">#{post.title}</a>"
+      else
+        match
+      end
     end
 
     self.html_contents = RDiscount.new(link_contents).to_html.chomp
