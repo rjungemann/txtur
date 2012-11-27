@@ -63,11 +63,7 @@ class Post < ActiveRecord::Base
       "<a href=\"/posts/#{uuid}\">#{post.title}</a>"
     end
 
-    begin
-      self.html_contents = RDiscount.new(link_contents).to_html.chomp
-    rescue Exception => e
-      raise PostContentException, 'An error occurred when trying to generate HTML for the post. Please examine your Markdown syntax and try again.'
-    end
+    self.html_contents = RDiscount.new(link_contents).to_html.chomp
   end
 
   def summary
