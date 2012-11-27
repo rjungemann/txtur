@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 
     begin
       @post = Post.new params[:post]
-    rescue PostContentException => e
+    rescue Exception => e
       flash[:error] = e.message
 
       render 'new'
