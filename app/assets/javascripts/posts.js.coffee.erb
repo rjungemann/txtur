@@ -4,7 +4,37 @@
   end
 %>
 
+insertTab = (o, e) ->
+  keyCode = if e.keyCode
+    e.keyCode
+  else
+    if e.charCode then e.charCode else e.which
+
+  if keyCode is 9 and not e.shiftKey and not e.ctrlKey and not e.altKey
+    oS = o.scrollTop
+
+    if o.setSelectionRange
+      sS = o.selectionStart
+      sE = o.selectionEnd
+      o.value = o.value.substring(0, sS) + '  ' + o.value.substr(sE)
+      o.setSelectionRange sS + 2, sS + 2
+      o.focus()
+
+    else if o.createTextRange
+      document.selection.createRange().text = '  '
+      e.returnValue = false
+
+    o.scrollTop = oS
+    e.preventDefault() if e.preventDefault
+
+    return false
+
+  true
+
 $ ->
+  $('textarea').keydown (e) ->
+    insertTab this, e
+
   $('abbr.timeago').timeago()
 
   $('.facebook-share').click (e) ->
