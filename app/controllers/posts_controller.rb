@@ -29,6 +29,8 @@ class PostsController < ApplicationController
 
     flash[:notice] = 'Post was successfully created.'
 
+    statsd.increment 'post-create'
+
     render 'show'
   end
 
