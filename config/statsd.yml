@@ -1,0 +1,13 @@
+development:
+  host: localhost
+  port: 8125
+  namespace: txtur-development
+test:
+  host: localhost
+  port: 8125
+  namespace: txtur-test
+production:
+  host: 184.106.135.11
+  port: 8125
+  namespace: txtur-production
+

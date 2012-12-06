@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :setup_user!
 
   def setup_user!
-    config = YAML.load_file(Rails.root.join 'config/facebook.yml')[Rails.env]
+    config = facebook_config
     oauth  = Koala::Facebook::OAuth.new config['app_id'], config['secret_key']
 
     @facebook_cookies ||= oauth.get_user_info_from_cookie cookies

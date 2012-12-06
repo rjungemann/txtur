@@ -10,6 +10,7 @@ gem 'koala'
 gem 'haml-rails'
 gem 'uuidtools'
 gem 'thin'
+gem 'statsd-ruby', :require => 'statsd'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
